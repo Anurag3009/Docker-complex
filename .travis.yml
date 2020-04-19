@@ -13,5 +13,10 @@ after_sucess:
    - docker build -t anurag3009/multi-nginx ./nginx
    - docker build -t anurag3009/multi-server ./server
    - docker build -t anurag3009/multi-worker ./worker
-
-
+   ##log in to the docker cli
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --pasword-stdin
+   ##take those images and push them docker hub
+   - docker push anurag3009/multi-client
+   - docker push anurag3009/multi-nginx
+   - docker push anurag3009/multi-server
+   - docker push anurag3009/multi-worker
