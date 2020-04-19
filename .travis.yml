@@ -1,0 +1,17 @@
+sudo : required
+services:
+   - docker
+
+before_install:
+   - docker build -t anurag3009/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+   - docker run -e CI=true anurag3009/react-test npm test 
+
+after_sucess:
+   - docker build -t anurag3009/multi-client ./client
+   - docker build -t anurag3009/multi-nginx ./nginx
+   - docker build -t anurag3009/multi-server ./server
+   - docker build -t anurag3009/multi-worker ./worker
+
+
